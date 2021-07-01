@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hamzetsaa.uberprojectservice.entities.Ville;
 import com.hamzetsaa.uberprojectservice.services.VilleService;
 
-
-
-
 @RestController
 @RequestMapping("/api")
 
@@ -48,7 +45,9 @@ public class VilleController {
 	
 	if(theVille == null) {
 		
-		throw new RuntimeException( " the City is not found "+ idVille);
+
+		throw new RuntimeException( " Narjis  the City is not found "+ idVille);
+
 	}
 	return theVille;
 	}
