@@ -46,7 +46,7 @@ public class VilleController {
 	if(theVille == null) {
 		
 
-		throw new RuntimeException( " Narjis  the City is not found "+ idVille);
+		throw new RuntimeException( "  Narjis the City is not found "+ idVille);
 
 	}
 	return theVille;
