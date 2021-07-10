@@ -40,7 +40,7 @@ public class CourseController {
 		
 		if(theCourse == null) {
 			
-			throw new RuntimeException( " the id course is not found "+ theCourse);
+			throw new RuntimeException( " the  id course is not found "+ theCourse);
 		}
 
 	 return theCourse;
