@@ -21,7 +21,7 @@ public class VilleController {
 
 	private VilleService villeService;
 
-	// injection service
+	
 	
 	@Autowired
 	public VilleController(VilleService TheVilleService) {
