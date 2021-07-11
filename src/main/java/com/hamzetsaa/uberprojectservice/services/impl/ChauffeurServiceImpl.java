@@ -14,7 +14,7 @@ public class ChauffeurServiceImpl implements ChauffeurService {
 
 	private ChauffeurRepository chauffeurRepository;
 	@Autowired
-	public ChauffeurServiceImpl(ChauffeurRepository theChauffeurRepository) {
+	public void  ChauffeurServiceImpl(ChauffeurRepository theChauffeurRepository) {
 		chauffeurRepository= theChauffeurRepository;
 	}
 	

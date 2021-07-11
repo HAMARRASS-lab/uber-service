@@ -1,79 +1,90 @@
+package com.hamzetsaa.uberprojectservice.controllers;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.hamzetsaa.uberprojectservice.entities.Vehicule;
+import com.hamzetsaa.uberprojectservice.services.VehiculeService;
 
- /*
-=======
-/*
->>>>>>> refs/remotes/origin/master
- * package com.hamzetsaa.uberprojectservice.controllers;
- * 
- * import com.hamzetsaa.uberprojectservice.entities.Vehicle; import
- * com.hamzetsaa.uberprojectservice.services.VehicleService; import
- * lombok.extern.slf4j.Slf4j; import
- * org.springframework.beans.factory.annotation.Autowired; import
- * org.springframework.web.bind.annotation.*;
- * 
- * import java.util.List; import java.util.Optional;
- * 
- * @Slf4j
- * 
- * @RestController
- * 
- * @RequestMapping(value = "/vehicles") public class VehicleController {
- * 
- * 
- * private final VehicleService vehicleService;
- * 
- * @Autowired public VehicleController(VehicleService vehicleService) {
- * this.vehicleService = vehicleService; }
- * 
- *//**
-	 * la list des vehicules
-	 */
-/*
- * @GetMapping("/all") public List<Vehicle> findVehicles() {
- * log.info("find vehicles"); return vehicleService.findAll(); }
- * 
- *//**
-	 * Consulter un vehicule
-	 */
-/*
- * @GetMapping public Vehicle getVehicle(@RequestParam(name = "id") Long id) {
- * log.info("find vehicle by id {}", id); return vehicleService.findById(id)
- * .orElseThrow(() -> new RuntimeException("not found")); }
- * 
- *//**
-	 * Up date vehicule
-	 */
-/*
- * @PutMapping(value = "/{id}") public Vehicle updateVehicle(@PathVariable(name
- * = "id") Long id, @RequestBody Vehicle v) {
- * 
- * Optional<Vehicle> vehicle = vehicleService.findById(id);
- * 
- * if (!vehicle.isPresent()) throw new RuntimeException("not exist");
- * 
- * v.setId(id); return vehicleService.save(v); }
- * 
- *//**
-	 * Add Vehicule
-	 */
-/*
- * @PostMapping public Vehicle addVehicle(@RequestBody Vehicle v) {
- * log.info("add vehicle {}", v); return vehicleService.save(v); }
- * 
- *//**
-	 * Supprimer un vehicule
-	 *//*
-		 * @DeleteMapping(value = "/{id}") public void deleteVehicle(@PathVariable(name
-		 * = "id") Long id) throws Exception { vehicleService.deleteById(id);
-		 * 
-		 * Optional<Vehicle> vehicule = vehicleService.findById(id);
-		 * 
-		 * if (vehicule.isPresent()) { vehicleService.deleteById(id); } else { throw new
-		 * Exception("No vehicule record exist for given id"); } }
-		 * 
-		 * // @GetMapping // public List<Vehicle> findByName(@RequestParam(name =
-		 * "name") String name) { // return vehicleService.findByNameContains(name); //
-		 * }
-		 * 
-		 * }
-		 */
+@RestController
+@RequestMapping(value ="/api")
+public class VehiculeController {
+	
+	// injjection service object 
+	
+	private VehiculeService vehiculeService;
+	
+	@Autowired
+	public VehiculeController( VehiculeService theVehiculeService){
+		
+		vehiculeService= theVehiculeService;
+	}
+
+	
+//create mapping  explotre all chauffeur
+	
+@GetMapping( value ="/vehicules")
+public List  <Vehicule> findAll(){
+		
+	return vehiculeService.findAll();
+}
+
+// crete mapping to expose a ville with a primary key 
+
+@GetMapping(value="/vehicules/{idVehicule}")
+public Optional<Vehicule> getVehicule(@PathVariable int  idVehicule) {
+	
+Optional<Vehicule> theVehicule = vehiculeService.findById(idVehicule);
+	
+	if(theVehicule == null) {
+		
+	
+		throw new RuntimeException( " the Vehicule is not found "+ idVehicule);
+	
+	}
+ return theVehicule;
+}
+
+// create a mipping to save a ville 
+
+@PostMapping("/vehicules")
+public Vehicule addVehicule (@RequestBody Vehicule theVehicule) {
+	
+	/* theVille.setIdVille(0); */
+	vehiculeService.save(theVehicule);
+	
+	return theVehicule;
+}
+
+@PutMapping("/vehicules")
+public Vehicule updateVehicule(@RequestBody Vehicule theVehicule) {
+	
+	vehiculeService.save(theVehicule);
+	
+	return theVehicule;
+}
+
+// add mapping to delete an ville
+
+@DeleteMapping(value ="/vehiucles/{idVehicule}")
+public String deleteVehicule( @PathVariable int idVehicule) {
+	
+	Optional<Vehicule> theVehicule = vehiculeService.findById(idVehicule);
+	
+	if (theVehicule == null) {
+		
+		throw new RuntimeException( " the id of Vehicule is not found "+ idVehicule);
+	}
+	vehiculeService.deleteById(idVehicule);
+	
+	return " the Chauffeur was deleted "+ idVehicule;
+	
+}
+}
