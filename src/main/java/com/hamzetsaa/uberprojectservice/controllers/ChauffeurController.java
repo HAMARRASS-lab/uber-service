@@ -18,7 +18,7 @@ import com.hamzetsaa.uberprojectservice.services.ChauffeurService;
 @RequestMapping(value = "/api")
 public class ChauffeurController {
 
-	// injjection service object
+	// injection service object
 
 	private ChauffeurService chauffeurService;
 
